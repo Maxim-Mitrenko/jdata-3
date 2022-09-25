@@ -17,7 +17,7 @@ create table ORDERS(
     id int auto_increment,
     date varchar(255),
     customer_id int,
-    product_name char(10),
+    product_name varchar(255),
     amount int check (amount > 0),
     PRIMARY KEY (id),
     FOREIGN KEY (customer_id) REFERENCES CUSTOMERS(id)
