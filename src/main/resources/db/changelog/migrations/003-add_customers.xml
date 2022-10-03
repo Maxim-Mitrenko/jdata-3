@@ -4,19 +4,19 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
     <changeSet id="003" author="Maxim">
-        <insert tableName="CUSTOMERS">
+        <insert tableName="customer">
             <column name="name" value="Иван"/>
             <column name="surname" value="Иванов"/>
             <column name="age" value="21"/>
             <column name="phone_number" value="+799999999999"/>
         </insert>
-        <insert tableName="CUSTOMERS">
+        <insert tableName="customer">
             <column name="name" value="алексей"/>
             <column name="surname" value="Иванов"/>
             <column name="age" value="27"/>
             <column name="phone_number" value="+79612345511"/>
         </insert>
-        <insert tableName="CUSTOMERS">
+        <insert tableName="customer">
             <column name="name" value="Алексей"/>
             <column name="surname" value="Сергеев"/>
             <column name="age" value="33"/>

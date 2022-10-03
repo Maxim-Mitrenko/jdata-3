@@ -1,4 +1,4 @@
-CREATE TABLE CUSTOMERS(
+CREATE TABLE customer(
     id int auto_increment,
     name varchar(255),
     surname varchar(255),
