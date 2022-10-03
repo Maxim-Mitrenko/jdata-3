@@ -1,5 +1,6 @@
 package com.example.lesson3.controller;
 
+import com.example.lesson3.entity.Product;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/fetch-product")
-    public List<String> get(@RequestParam String name) {
+    public List<Product> get(@RequestParam String name) {
         return repository.getNameProduct(name);
     }
 }

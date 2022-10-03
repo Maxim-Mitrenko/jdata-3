@@ -1,44 +1,22 @@
 package com.example.lesson3.reposirory;
 
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import com.example.lesson3.entity.Product;
 import org.springframework.stereotype.Repository;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Repository
 public class SQLRepository {
 
-    private final NamedParameterJdbcTemplate template;
-    private static final String script = script();
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public SQLRepository(NamedParameterJdbcTemplate template) {
-        this.template = template;
-    }
-
-    private static String script() {
-        try (InputStream is = new ClassPathResource("script.sql").getInputStream();
-             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is))) {
-            return bufferedReader.lines()
-                    .collect(Collectors.joining("\n"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public List<String> getNameProduct(String nameCustomer) {
-        List<String> list = new ArrayList<>();
-        var set = template.queryForRowSet(script, Map.of("name", nameCustomer));
-        while (set.next()) {
-            list.add(set.getString("product_name"));
-        }
-        return list;
+    public List<Product> getNameProduct(String nameCustomer) {
+        Query query = entityManager.createQuery("select p from Product p where p.customer.name = :name");
+        query.setParameter("name", nameCustomer);
+        return query.getResultList();
     }
 }
